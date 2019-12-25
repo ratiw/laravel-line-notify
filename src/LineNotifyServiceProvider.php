@@ -2,9 +2,10 @@
 
 namespace Hinaloe\LineNotify;
 
-use Hinaloe\LineNotify\Channel\LineChannel;
-use Illuminate\Notifications\ChannelManager;
 use Illuminate\Support\ServiceProvider;
+use Hinaloe\LineNotify\Channel\LineChannel;
+use Hinaloe\LineNotify\Message\LineMessage;
+use Illuminate\Notifications\ChannelManager;
 
 class LineNotifyServiceProvider extends ServiceProvider
 {
@@ -15,9 +16,7 @@ class LineNotifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->make(ChannelManager::class)->extend('line', function ($app) {
-            return $app->make(LineChannel::class);
-        });
+        //
     }
 
     /**
