@@ -16,7 +16,9 @@ class LineNotifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->make(ChannelManager::class)->extend('line', function ($app) {
+            return $app->make(LineChannel::class);
+        });
     }
 
     /**
