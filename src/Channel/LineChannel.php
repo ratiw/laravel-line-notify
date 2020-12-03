@@ -29,13 +29,18 @@ class LineChannel
 
     public function send($notifable, Notification $notification)
     {
-        if (!$token = $notifable->routeNotificationFor('line')) {
+        if (!$tokens = $notifable->routeNotificationFor('line')) {
             return;
         }
-        $this->http->post($this->endpoint, $this->buildRequest(
-            $notification->toLine($notifable),
-            $token
-        ));
+        if (!is_array($tokens)) {
+            $tokens = [$tokens];
+        }
+        foreach ($tokens as $token) {
+            $this->http->post($this->endpoint, $this->buildRequest(
+                $notification->toLine($notifable),
+                $token
+            ));
+        }
     }
 
     /**
