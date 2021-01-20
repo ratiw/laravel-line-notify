@@ -1,6 +1,6 @@
 {
   "name": "hinaloe/laravel-line-notify",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "LINE Notify Provider for Laravel 5 notification",
   "minimum-stability": "dev",
   "prefer-stable": true,
