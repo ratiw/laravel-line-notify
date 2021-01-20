@@ -32,7 +32,20 @@ class LineChannel
         if (!$tokens = $notifable->routeNotificationFor('line')) {
             return;
         }
-        if (!is_array($tokens)) {
+        if (is_string($tokens)) {
+            $tokens = [$tokens];
+        }
+        foreach ($tokens as $token) {
+            $this->http->post($this->endpoint, $this->buildRequest(
+                $notification->toLine($notifable),
+                $token
+            ));
+        }
+    }
+
+    public function notify($tokens, Notification $notification)
+    {
+        if (is_string($tokens)) {
             $tokens = [$tokens];
         }
         foreach ($tokens as $token) {
