@@ -43,14 +43,14 @@ class LineChannel
         }
     }
 
-    public function notify($tokens, Notification $notification)
+    public function notify($tokens, LineMessage $lineMessage)
     {
         if (is_string($tokens)) {
             $tokens = [$tokens];
         }
         foreach ($tokens as $token) {
             $this->http->post($this->endpoint, $this->buildRequest(
-                $notification->toLine($notifable),
+                $lineMessage,
                 $token
             ));
         }
